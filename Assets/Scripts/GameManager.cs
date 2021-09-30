@@ -16,17 +16,6 @@ public class GameManager : MonoBehaviour
 {
     public AudioSource BuyItemSfx;
 
-    // Store objects
-    public Button ribbonButton, ballButton, milkButton;
-    public GameObject ribbonSoldText, ballSoldText, milkSoldText;
-    public Text ribbonPriceText, ballPriceText, milkPriceText, ribbonPriceAfterSoldText, ballPriceAfterSoldText, milkPriceAfterSoldText;
-
-    // Game panel objects
-    public GameObject hairRibbon, ballOfYarn, milk;
-
-    private bool isRibbonSold, isBallSold, isMilkSold;
-    public int ribbonPrice = 2000000, ballPrice = 4000000, milkPrice = 2500000;
-
     private static GameManager _instance = null;
     public static GameManager Instance
     {
@@ -65,31 +54,6 @@ public class GameManager : MonoBehaviour
     {
         AddAllResources();
         GoldInfo.text = $"Gold: { UserDataManager.Progress.Gold.ToString("0") }";
-
-        // menonaktifkan semua item di awal
-        hairRibbon.gameObject.SetActive(false);
-        ballOfYarn.gameObject.SetActive(false);
-        milk.gameObject.SetActive(false);
-
-        // menonaktifkan button di store
-        ribbonButton.interactable = false;
-        ballButton.interactable = false;
-        milkButton.interactable = false;
-
-        // mengatur text item yang belum terjual
-        ribbonSoldText.gameObject.SetActive(false);
-        ballSoldText.gameObject.SetActive(false);
-        milkSoldText.gameObject.SetActive(false);
-
-        // mengatur harga item yang akan dijual
-        ribbonPriceText.text = ribbonPrice.ToString() + " Meows";
-        ballPriceText.text = ballPrice.ToString() + " Meows";
-        milkPriceText.text = milkPrice.ToString() + " Meows";
-
-        // menonaktifkan text
-        ribbonPriceAfterSoldText.gameObject.SetActive(false);
-        ballPriceAfterSoldText.gameObject.SetActive(false);
-        milkPriceAfterSoldText.gameObject.SetActive(false);
     }
 
     private void Update()
@@ -106,79 +70,6 @@ public class GameManager : MonoBehaviour
 
         CoinIcon.transform.localScale = Vector3.LerpUnclamped(CoinIcon.transform.localScale, Vector3.one * 0.25f, 0.15f);
         // CoinIcon.transform.Rotate(0f, 0f, Time.deltaTime * -100f);
-
-        DoYouHaveEnoughPawsToBuySmth();
-    }
-
-    public void SellRibbon()
-    {
-        hairRibbon.gameObject.SetActive(true);
-        UserDataManager.Progress.Gold -= ribbonPrice;
-        isRibbonSold = true;
-        ribbonSoldText.gameObject.SetActive(true);
-        ribbonPriceText.gameObject.SetActive(false);
-
-        ribbonPriceAfterSoldText.text = ribbonPrice.ToString() + " Meows";
-        ribbonPriceAfterSoldText.gameObject.SetActive(true);
-
-        BuyItemSfx.Play();
-    }
-
-    public void SellBall()
-    {
-        ballOfYarn.gameObject.SetActive(true);
-        UserDataManager.Progress.Gold -= ballPrice;
-        isBallSold = true;
-        ballSoldText.gameObject.SetActive(true);
-        ballPriceText.gameObject.SetActive(false);
-
-        ballPriceAfterSoldText.text = ballPrice.ToString() + " Meows";
-        ballPriceAfterSoldText.gameObject.SetActive(true);
-
-        BuyItemSfx.Play();
-    }
-
-    public void SellMilk()
-    {
-        milk.gameObject.SetActive(true);
-        UserDataManager.Progress.Gold -= milkPrice;
-        isMilkSold = true;
-        milkSoldText.gameObject.SetActive(true);
-        milkPriceText.gameObject.SetActive(false);
-
-        milkPriceAfterSoldText.text = milkPrice.ToString() + " Meows";
-        milkPriceAfterSoldText.gameObject.SetActive(true);
-
-        BuyItemSfx.Play();
-    }
-
-    // mengecek apakah pawgold cukup untuk membeli item yang dijual
-    void DoYouHaveEnoughPawsToBuySmth()
-    {
-        if (UserDataManager.Progress.Gold < ribbonPrice)
-            ribbonButton.interactable = false;
-
-        if (UserDataManager.Progress.Gold < ballPrice)
-            ballButton.interactable = false;
-
-        if (UserDataManager.Progress.Gold < milkPrice)
-            milkButton.interactable = false;
-
-
-        if (!isRibbonSold && UserDataManager.Progress.Gold >= ribbonPrice)
-        {
-            ribbonButton.interactable = true;
-        }
-
-        if (!isBallSold && UserDataManager.Progress.Gold >= ballPrice)
-        {
-            ballButton.interactable = true;
-        }
-
-        if (!isMilkSold && UserDataManager.Progress.Gold >= milkPrice)
-        {
-            milkButton.interactable = true;
-        }
     }
 
     private void AddAllResources()
