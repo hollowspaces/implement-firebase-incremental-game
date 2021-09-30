@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "94128445076",
+    "project_id": "incremental-game-puji",
+    "storage_bucket": "incremental-game-puji.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:94128445076:android:9ab75e1df91890adda4681",
+        "android_client_info": {
+          "package_name": "com.puji.incrementalgame"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "94128445076-6b8vb7j97kh3snos3hbne4gkucsau7g7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBfkR8TLC64HPMsX6IeXhkGEnXIVvXk1bE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "94128445076-6b8vb7j97kh3snos3hbne4gkucsau7g7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
